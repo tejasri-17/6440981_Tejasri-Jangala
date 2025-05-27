@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Local Community Event Portal</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- Internal CSS -->
+  <style>
+    /* 1. Internal styling */
+    body {
+      background-color: #f0f8ff;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 2. CSS Syntax and Comments */
+    /* Main call-to-action button */
+    .cta-button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* 3. Selectors Playground */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    h2 {
+      color: #222;
+    }
+    #mainHeader {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .eventCard {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      margin: 20px;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    h3, p {
+      font-family: 'Roboto', sans-serif;
+      color: #444;
+    }
+
+    /* 4. Color & Background Styling */
+    body {
+      background: url('https://via.placeholder.com/1500x800') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #e6f7ff;
+    }
+    section.header {
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    /* 5. Typography */
+    .description {
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 300;
+      text-align: justify;
+      text-transform: capitalize;
+      letter-spacing: 0.5px;
+      line-height: 1.6;
+    }
+
+    /* 6. Link and List Styling */
+    nav a:link {
+      color: navy;
+    }
+    nav a:visited {
+      color: purple;
+    }
+    nav a:hover {
+      color: orange;
+    }
+    nav a:active {
+      color: red;
+    }
+    nav ul {
+      list-style-type: none;
+      list-style-position: inside;
+      padding: 0;
+      margin: 0;
+    }
+    nav li {
+      padding: 10px;
+      display: inline-block;
+    }
+
+    /* 7. Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* 8. Box Model & Layout */
+    .eventCard {
+      margin: 20px;
+      padding: 15px;
+      border: 2px solid #ddd;
+      outline: 2px dashed #666;
+    }
+    .hidden {
+      visibility: hidden;
+    }
+    .gone {
+      display: none;
+    }
+
+    /* 9. Multi-column Layout */
+    .news {
+      column-count: 2;
+      column-gap: 30px;
+      column-rule: 1px solid gray;
+      padding: 20px;
+    }
+
+    /* 10. Responsive Design */
+    @media screen and (max-width: 768px) {
+      nav li {
+        display: block;
+        margin-bottom: 10px;
+      }
+      img {
+        width: 100%;
+      }
+      body {
+        font-size: 14px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 1. Inline Style -->
+  <h1 style="color: red;">Welcome to Our Community Events!</h1>
+
+  <!-- 3. ID selector -->
+  <div id="mainHeader">
+    <h2>Community Portal</h2>
+  </div>
+
+  <!-- 6. Link Styling -->
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- 4. Gradient header -->
+  <section class="header">
+    <h2>Upcoming Events</h2>
+  </section>
+
+  <!-- 5. Typography & 8. Box Model -->
+  <div class="eventCard">
+    <h3>Park Cleanup</h3>
+    <p class="description">Join us to clean up our local park and make the environment better.</p>
+    <button class="cta-button">Join Now</button>
+  </div>
+
+  <!-- 7. Table Styling -->
+  <table>
+    <tr>
+      <th>Event</th>
+      <th>Date</th>
+      <th>Location</th>
+    </tr>
+    <tr>
+      <td>Park Cleanup</td>
+      <td>June 10</td>
+      <td>Main Street Park</td>
+    </tr>
+    <tr>
+      <td>Community Meeting</td>
+      <td>June 15</td>
+      <td>City Hall</td>
+    </tr>
+  </table>
+
+  <!-- 9. Multi-column Text -->
+  <div class="news">
+    <p>The community is launching new sustainability initiatives. All residents are invited to participate in discussions, workshops, and clean-up drives. Our shared efforts can greatly impact the neighborhood's quality of life. We encourage volunteers to bring ideas, tools, and friends.</p>
+    <p>Don't forget to check out our events calendar regularly. We post new events, meetings, and workshops frequently. Your participation shapes the community and its future. Stay informed and engaged!</p>
+  </div>
+
+</body>
+</html>

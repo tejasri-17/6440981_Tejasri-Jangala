@@ -1,0 +1,1 @@
+if (seats > 0) { alert('Available'); }

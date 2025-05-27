@@ -1,0 +1,1 @@
+let seats = 20;

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community Event Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial; padding: 20px; background-color: #f9f9f9; }
+    .event { border: 1px solid #ccc; padding: 10px; margin: 10px; display: none; }
+    .hidden { display: none; }
+    #loading { color: gray; }
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <h1>Welcome to the Community Portal</h1>
+
+  <!-- Filter & Search -->
+  <label>Filter by Category:
+    <select id="categoryFilter">
+      <option value="">All</option>
+      <option value="Music">Music</option>
+      <option value="Workshop">Workshop</option>
+    </select>
+  </label>
+
+  <input type="text" id="searchInput" placeholder="Search by name...">
+
+  <!-- Events Section -->
+  <div id="eventsContainer"></div>
+  <div id="loading">Loading events...</div>
+
+  <!-- Registration Form -->
+  <h2>Register for Event</h2>
+  <form id="registrationForm">
+    <label>Name: <input type="text" name="name" required></label><br>
+    <label>Email: <input type="email" name="email" required></label><br>
+    <label>Event:
+      <select name="event">
+        <option value="Music Night">Music Night</option>
+        <option value="Art Workshop">Art Workshop</option>
+      </select>
+    </label><br>
+    <button id="registerBtn" type="submit">Register</button>
+    <p id="formMessage"></p>
+  </form>
+
+  <!-- JQuery Message Box -->
+  <div id="jqueryBox" class="event">Thanks for using jQuery fadeIn!</div>
+
+<script>
+  // 1. JS Basics
+  console.log("Welcome to the Community Portal");
+  window.onload = () => alert("Page fully loaded");
+
+  // 2. Syntax, Data Types
+  const eventName = "Music Night";
+  const eventDate = "2025-06-20";
+  let seats = 50;
+  console.log(`${eventName} on ${eventDate} has ${seats} seats`);
+  seats--;
+
+  // 3. Conditionals, Loops, Errors
+  const eventList = [
+    { name: "Music Night", category: "Music", date: "2025-06-20", seats: 20 },
+    { name: "Art Workshop", category: "Workshop", date: "2024-04-01", seats: 0 },
+  ];
+
+  function displayEvents(events) {
+    const container = document.getElementById("eventsContainer");
+    container.innerHTML = '';
+    events.forEach(evt => {
+      if (new Date(evt.date) < new Date() || evt.seats <= 0) return;
+      const div = document.createElement("div");
+      div.className = "event";
+      div.innerHTML = `<strong>${evt.name}</strong> - ${evt.category} <br> Seats: ${evt.seats}
+      <button onclick="register('${evt.name}')">Register</button>`;
+      container.appendChild(div);
+    });
+    $('.event').fadeIn(); // 14. jQuery fadeIn
+  }
+
+  try {
+    displayEvents(eventList);
+  } catch (e) {
+    console.error("Error displaying events", e);
+  }
+
+  // 4. Functions, Closures
+  function addEvent(name, category) {
+    eventList.push({ name, category, date: "2025-07-01", seats: 10 });
+  }
+
+  function categoryCounter(category) {
+    let count = 0;
+    return () => ++count;
+  }
+  const musicCounter = categoryCounter("Music");
+
+  function filterEventsByCategory(category, callback) {
+    return callback(eventList.filter(evt => evt.category === category));
+  }
+
+  // 5. Objects and Prototypes
+  function Event(name, category, date, seats) {
+    this.name = name;
+    this.category = category;
+    this.date = date;
+    this.seats = seats;
+  }
+  Event.prototype.checkAvailability = function () {
+    return this.seats > 0;
+  };
+
+  const sample = new Event("Sample Event", "Music", "2025-10-01", 10);
+  console.log("Available:", sample.checkAvailability());
+
+  // 6. Arrays & Methods
+  eventList.push({ name: "Tech Talk", category: "Workshop", date: "2025-08-15", seats: 15 });
+  const musicEvents = eventList.filter(e => e.category === "Music");
+  const displayTitles = eventList.map(e => `Event: ${e.name}`);
+  console.log(displayTitles);
+
+  // 7. DOM Manipulation
+  function register(name) {
+    alert(`You registered for ${name}`);
+    document.getElementById("jqueryBox").style.display = 'block';
+    $('#jqueryBox').fadeOut(3000);
+  }
+
+  // 8. Event Handling
+  document.getElementById("categoryFilter").onchange = e => {
+    const value = e.target.value;
+    const filtered = value ? eventList.filter(e => e.category === value) : eventList;
+    displayEvents(filtered);
+  };
+
+  document.getElementById("searchInput").onkeydown = e => {
+    const text = e.target.value.toLowerCase();
+    const filtered = eventList.filter(evt => evt.name.toLowerCase().includes(text));
+    displayEvents(filtered);
+  };
+
+  // 9. Async JS
+  function mockFetchEvents() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve([{ name: "Yoga Class", category: "Wellness", date: "2025-12-01", seats: 25 }]);
+      }, 2000);
+    });
+  }
+
+  async function loadMoreEvents() {
+    document.getElementById("loading").style.display = 'block';
+    try {
+      const data = await mockFetchEvents();
+      eventList.push(...data);
+      displayEvents(eventList);
+    } catch (err) {
+      console.error("Failed to load events", err);
+    } finally {
+      document.getElementById("loading").style.display = 'none';
+    }
+  }
+  loadMoreEvents();
+
+  // 10. Modern JS
+  const showInfo = (event = { name: "Default", seats: 0 }) => {
+    const { name, seats } = event;
+    console.log(`Modern JS => ${name} has ${seats} seats`);
+  };
+
+  // 11. Forms
+  document.getElementById("registrationForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.elements.name.value;
+    const email = form.elements.email.value;
+    const event = form.elements.event.value;
+
+    if (!name || !email) {
+      document.getElementById("formMessage").innerText = "All fields required!";
+      document.getElementById("formMessage").className = "error";
+      return;
+    }
+
+    // 12. AJAX
+    document.getElementById("formMessage").innerText = "Sending...";
+    setTimeout(() => {
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, event }),
+        headers: { 'Content-type': 'application/json; charset=UTF-8' },
+      })
+        .then(res => res.json())
+        .then(() => {
+          document.getElementById("formMessage").innerText = "Registered successfully!";
+          document.getElementById("formMessage").className = "success";
+        })
+        .catch(() => {
+          document.getElementById("formMessage").innerText = "Error submitting!";
+          document.getElementById("formMessage").className = "error";
+        });
+    }, 1000);
+  });
+
+  // 13. Debugging (use console.log, dev tools)
+  console.log("Form submission initialized");
+</script>
+
+</body>
+</html>

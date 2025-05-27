@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community Event Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: linear-gradient(to right, #e0f7fa, #ffffff); }
+    .eventCard { border: 1px solid #ccc; padding: 15px; margin: 15px 0; border-radius: 10px; background: white; }
+    .news { column-count: 2; column-gap: 30px; column-rule: 1px solid gray; margin-top: 20px; }
+    .video-container, .form-section { margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1 class="text-center text-primary">Welcome to the Community Event Portal</h1>
+
+  <nav class="nav justify-content-center mb-4">
+    <a class="nav-link" href="#home">Home</a>
+    <a class="nav-link" href="#events">Events</a>
+    <a class="nav-link" href="#contact">Contact</a>
+  </nav>
+
+  <div id="welcomeBanner" class="p-3 mb-4 bg-primary text-white text-center">
+    Welcome! <span class="fw-bold text-warning">Special Offers Today!</span>
+  </div>
+
+  <div class="eventCard">
+    <h3>Community Cleanup</h3>
+    <p>Date: 2025-06-10</p>
+    <p>Location: Central Park</p>
+  </div>
+
+  <div class="eventCard">
+    <h3>Music Night</h3>
+    <p>Date: 2025-07-15</p>
+    <p>Location: City Amphitheatre</p>
+  </div>
+
+  <div class="form-section">
+    <h2>Register for an Event</h2>
+    <form onsubmit="return registerEvent(event)">
+      <input class="form-control mb-2" type="text" id="name" placeholder="Your Name" required>
+      <input class="form-control mb-2" type="email" id="email" placeholder="Your Email" required>
+      <select class="form-select mb-2" id="eventType">
+        <option value="Workshop">Workshop</option>
+        <option value="Concert">Concert</option>
+      </select>
+      <textarea class="form-control mb-2" id="message" placeholder="Any message..." rows="3"></textarea>
+      <button class="btn btn-success" type="submit">Submit</button>
+      <p id="confirmation" class="mt-2 text-success"></p>
+    </form>
+  </div>
+
+  <div class="video-container">
+    <h2>Watch Our Promo Video</h2>
+    <video controls oncanplay="document.getElementById('videoReady').textContent='Ready to Play!'">
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+    <p id="videoReady" class="text-info"></p>
+  </div>
+
+  <div class="news">
+    <p>Stay updated with the latest community programs. We offer a wide range of activities for all age groups including music, art, wellness, and educational sessions.</p>
+    <p>Join hands with local groups and make a difference! From cleanups to cultural nights, there’s always something happening in our vibrant community.</p>
+  </div>
+
+  <footer class="text-center text-white bg-dark py-3 mt-4">
+    &copy; 2025 Community Portal | <a href="help.html" class="text-white">Help</a>
+  </footer>
+
+  <script>
+    function registerEvent(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const event = document.getElementById('eventType').value;
+      document.getElementById('confirmation').textContent = `Thanks ${name}, you are registered for ${event}!`;
+      return false;
+    }
+  </script>
+</body>
+</html>
